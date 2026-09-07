@@ -1,5 +1,20 @@
 # React + Vite
 
+## Deploy to Vercel
+
+Import this repository into Vercel with these settings:
+
+- Framework preset: `Vite`
+- Build command: `npm run build`
+- Output directory: `dist`
+
+Add these environment variables in the Vercel project settings for Production, Preview, and Development:
+
+- `VITE_SUPABASE_URL`
+- `VITE_SUPABASE_PUBLISHABLE_KEY`
+
+The `vercel.json` file keeps React Router routes working when a page is opened directly.
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:
