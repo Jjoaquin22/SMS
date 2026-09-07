@@ -5,33 +5,53 @@ import { supabase } from "../supabaseClient";
 function Register() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     async function handleRegister(e) {
         e.preventDefault();
+        setErrorMessage("");
+        setIsSubmitting(true);
 
-        const { data, error } = await supabase.auth.signUp({
-            email: email,
-            password: password,
+        const { error } = await supabase.auth.signUp({
+            email,
+            password,
         });
 
         if (error) {
-            console.log(error.message);
-            return;
+            setErrorMessage(error.message);
         }
 
-        console.log(data);
-        alert("Registration successful!");
+        setIsSubmitting(false);
     }
     return (
         <>    
             <h2>Register</h2>
             <Back />
-           <form onSubmit={handleSubmit}>
-                <input name="email" type="email" />
-                <input name="password" type="password" />
+           <form onSubmit={handleRegister}>
+                <input
+                    name="email"
+                    type="email"
+                    placeholder="Email"
+                    autoComplete="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                />
+                <input
+                    name="password"
+                    type="password"
+                    placeholder="Password"
+                    autoComplete="new-password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    minLength={6}
+                    required
+                />
+                {errorMessage && <p role="alert">{errorMessage}</p>}
 
-                <button type="submit">
-                    Register
+                <button type="submit" disabled={isSubmitting}>
+                    {isSubmitting ? "Registering..." : "Register"}
                 </button>
             </form>
         </>
