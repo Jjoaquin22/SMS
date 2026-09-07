@@ -26,22 +26,11 @@ function Register() {
         <>    
             <h2>Register</h2>
             <Back />
-            <form onSubmit={handleRegister}>
-               <input
-                    type="email"
-                    placeholder="Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                />
+           <form onSubmit={handleSubmit}>
+                <input name="email" type="email" />
+                <input name="password" type="password" />
 
-                <input
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-
-                <button type="submit" onClick={handleRegister}>
+                <button type="submit">
                     Register
                 </button>
             </form>
